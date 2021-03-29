@@ -1,8 +1,8 @@
-#' Title
+#' Get number of levels of factor variables in data.frame
 #'
-#' @param df
-#' @param input1
-#' @param input2
+#' @param df A \code{data.frame}
+#' @param input1 A \code{character} vector
+#' @param input2 An optional \code{character} vector
 #'
 #' @return
 #' @export
