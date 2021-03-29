@@ -1,3 +1,13 @@
+#' Title
+#'
+#' @param df
+#' @param input1
+#' @param input2
+#'
+#' @return
+#' @export
+#'
+#' @examples
 get_input_lengths <- function(df, input1, input2 = NULL) {
 
   fct_df_rw <- df_to_factor(df) %>% select(all_of(input1))
