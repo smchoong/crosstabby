@@ -1,3 +1,25 @@
+#' Create large-scale crosstab
+#'
+#' @param df A \code{data.frame}
+#' @param row.vars A \code{character} or {character} vector
+#' @param col.vars A \code{character} or {character} vector
+#' @param wts A \code{character} or {character} vector
+#' @param data.frame TRUE/FALSE: Should output be returned as a data.frame? Defaults to \code{FALSE}
+#' @param format A \code{character} indicating "percent" or "decimal" format for the totals of the variables tabulated. Only available when data.frame=TRUE.
+#' @param split.vars TRUE/FALSE: Should col.vars be treated as combined or crossed variables? Defaults to \code{FALSE}
+#'
+#' @return A \code{data.frame} with a "Question" column for the row variable names, a "Response" column for the row variable levels, columns displaying
+#' percentages by total and grouped by column variables supplied by user.
+#'
+#' @import tidyverse pewmethods foreach data.table
+#' @export
+#'
+#' @examples
+#' # Basic unweighted topline crosstab
+#' big_tabby(df, row.vars)
+#'
+#' # Weighted crosstab grouped by column variables
+#' big_tabby(df, row.vars, col.vars, wts = "weights")
 big_tabby <-
   function(df,
            row.vars,
