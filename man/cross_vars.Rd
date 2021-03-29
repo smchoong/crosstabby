@@ -19,6 +19,3 @@ cross_vars(df, var1, var2)
 \description{
 Combine two variables for analysis by groups
 }
-\examples{
-cross_vars(df, "qrace", "qhorse")
-}

@@ -19,6 +19,3 @@ get_input_lengths(df, input1, input2 = NULL)
 \description{
 Get number of levels of factor variables in data.frame
 }
-\examples{
-get_input_lengths(tbl, row.variables, column.variables)
-}

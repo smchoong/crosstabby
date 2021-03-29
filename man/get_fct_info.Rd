@@ -17,6 +17,3 @@ A \code{list} of the names and levels of variables in row.vars
 \description{
 Get names and levels of all variables in a factored data.frame
 }
-\examples{
-get_fct_info(factor_data, analysis_variables)
-}

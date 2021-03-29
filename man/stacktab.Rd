@@ -15,6 +15,3 @@ A \code{data.frame}
 \description{
 Combine list of data.frames vertically as one data.frame
 }
-\examples{
-stacktab(df_list)
-}

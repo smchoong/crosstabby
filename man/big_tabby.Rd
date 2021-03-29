@@ -36,10 +36,3 @@ percentages by total and grouped by column variables supplied by user.
 \description{
 Create large-scale crosstab
 }
-\examples{
-# Basic unweighted topline crosstab
-big_tabby(df, row.vars)
-
-# Weighted crosstab grouped by column variables
-big_tabby(df, row.vars, col.vars, wts = "weights")
-}

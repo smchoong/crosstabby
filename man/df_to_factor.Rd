@@ -15,6 +15,3 @@ A \code{data.frame} with factors as variables
 \description{
 Transform all variables of data.frame to factors
 }
-\examples{
-df_to_factor(test_df)
-}
