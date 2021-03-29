@@ -1,29 +1,29 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# crosstabr
+# crosstabby
 
 <!-- badges: start -->
 
 <!-- badges: end -->
 
-Crosstabr is a package built to streamline the pre-processing and
+Crosstabby is a package built to streamline the pre-processing and
 analysis of survey data.
 
 ## Installation
 
-You can install the released version of crosstabr from
+You can install the released version of crosstabby from
 [CRAN](https://CRAN.R-project.org) with:
 
 ``` r
-install.packages("crosstabr")
+install.packages("crosstabby")
 ```
 
 And the development version from [GitHub](https://github.com/) with:
 
 ``` r
 # install.packages("devtools")
-devtools::install_github("smchoong/crosstabr")
+devtools::install_github("smchoong/crosstabby")
 ```
 
 ## Example
@@ -31,7 +31,7 @@ devtools::install_github("smchoong/crosstabr")
 This is a basic example which shows you how to solve a common problem:
 
 ``` r
-library(crosstabr)
+library(crosstabby)
 ## basic example code
 ```
 
