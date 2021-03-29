@@ -8,7 +8,7 @@
 <!-- badges: end -->
 
 Crosstabr is a package built to streamline the pre-processing and
-analysis of survey data projects.
+analysis of survey data.
 
 ## Installation
 
