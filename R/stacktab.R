@@ -8,7 +8,6 @@
 #' @export
 #'
 #' @examples
-#' stacktab(df_list)
 stacktab <- function(x) {
   x <- data.table::rbindlist(x, fill = T)
   out <- x %>%

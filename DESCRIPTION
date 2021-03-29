@@ -9,6 +9,7 @@ Authors@R:
            comment = c(ORCID = "YOUR-ORCID-ID"))
 Description: A package to streamline preprocessing and analysis of survey data in R.
 License: MIT + file LICENSE
+Imports: tidyverse, pewmethods, data.table, foreach, hardhat, tidyr
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
