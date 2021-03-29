@@ -4,7 +4,7 @@
 #'
 #' @return A \code{data.frame}
 #'
-#' @import data.table tidyr
+#' @importFrom data.table rbindlist
 #' @export
 #'
 #' @examples

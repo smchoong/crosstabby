@@ -6,7 +6,7 @@
 #' @return A \code{list} of the names and levels of variables in row.vars
 #'
 #'
-#' @import hardhat
+#' @importFrom hardhat get_levels
 #' @export
 #'
 #' @examples
