@@ -10,6 +10,7 @@
 #' @export
 #'
 #' @examples
+#' get_fct_info(factor_data, analysis_variables)
 get_fct_info <- function(df_factored, row.vars) {
   names<-row.vars
   levels<-df_factored %>%

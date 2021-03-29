@@ -8,6 +8,7 @@
 #' @export
 #'
 #' @examples
+#' cross_vars(df, "qrace", "qhorse")
 cross_vars <- function(df, var1, var2) {
 
   var_pat1 <- paste("\\b", var1, "\\b", sep = "")

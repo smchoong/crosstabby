@@ -6,6 +6,7 @@
 #' @export
 #'
 #' @examples
+#' df_to_factor(test_df)
 df_to_factor <- function(df) {
   fct_df <- df
   cols <- names(fct_df)
