@@ -32,12 +32,6 @@ This is a basic example which shows you how to solve a common problem:
 
 ``` r
 library(crosstabr)
-#> Warning: replacing previous import 'foreach::when' by 'purrr::when' when loading
-#> 'crosstabr'
-#> Warning: replacing previous import 'data.table::transpose' by 'purrr::transpose'
-#> when loading 'crosstabr'
-#> Warning: replacing previous import 'foreach::accumulate' by 'purrr::accumulate'
-#> when loading 'crosstabr'
 ## basic example code
 ```
 
