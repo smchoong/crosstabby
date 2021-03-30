@@ -117,7 +117,7 @@ big_tabby <-
 
     if (is.null(col.vars) & length(row.vars) > 1 & data.frame) {
       out <- tabby(df, row.vars, col.vars, wts)
-      out <- suppressWarnings(stacktab(out)) %>%
+      out <- suppressWarnings(stacktab(out, row.vars)) %>%
         relocate(c("Question", "Response"), .before = everything())
 
     }
@@ -137,7 +137,7 @@ big_tabby <-
 
     if (split.vars & data.frame) {
       out <- tabby(df, row.vars, col.vars, wts)
-      out <- suppressWarnings(stacktab(out)) %>%
+      out <- suppressWarnings(stacktab(out, row.vars)) %>%
         relocate(c("Question", "Response", "Total"), .before = everything()) %>%
         select(-weight_name)
     }
@@ -149,7 +149,7 @@ big_tabby <-
               col.vars = b,
               wts = "weights")
       }
-      out <- suppressWarnings(stacktab(out))
+      out <- suppressWarnings(stacktab(out, row.vars))
 
       fct_df <- df_to_factor(df)
       fct_info <- get_fct_info(fct_df, row.vars)
