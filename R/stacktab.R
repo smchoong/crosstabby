@@ -9,10 +9,11 @@
 #' @export
 #'
 #' @examples
-stacktab <- function(df_list, row.vars) {
+stacktab <- function(df_list, vars) {
   x <- data.table::rbindlist(df_list, fill = T)
-  x <- x %>%
-    select(all_of(row.vars)) %>%
-    gather(., key = "Question", value = "Response") %>%
+  var_names <- x %>%
+    select(all_of(vars)) %>% names()
+  out <- x %>%
+    gather(var_names, key = "Question", value = "Response") %>%
     drop_na(Response)
 }
