@@ -35,7 +35,7 @@ big_tabby <-
     # if (!is.null(format) & !(format %in% c("percent", "decimal")))
     #   stop("The format argument requires character input of either 'percent' or 'decimal'")
 
-
+    # Detect presence of variables with excessive number of levels in row.vars and col.vars arguments
     if (!(is.null(row.vars) & is.null(col.vars))) {
       problem_vars <-
         suppressWarnings(get_input_lengths(df, row.vars, col.vars))
@@ -46,6 +46,7 @@ big_tabby <-
 
     }
 
+    # If variables with too many levels exist, ask user whether they want the variables removed or the operation cancelled
     if (length(which(problem_vars)) > 0) {
       message(
         paste(
