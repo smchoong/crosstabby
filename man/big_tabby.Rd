@@ -9,9 +9,9 @@ big_tabby(
   row.vars,
   col.vars = NULL,
   wts = NULL,
-  data.frame = FALSE,
-  format = FALSE,
-  split.vars = FALSE
+  split.vars = FALSE,
+  percent = FALSE,
+  decimal = FALSE
 )
 }
 \arguments{
@@ -23,11 +23,11 @@ big_tabby(
 
 \item{wts}{A \code{character} or {character} vector}
 
-\item{data.frame}{TRUE/FALSE: Should output be returned as a data.frame? Defaults to \code{FALSE}}
-
-\item{format}{A \code{character} indicating "percent" or "decimal" format for the totals of the variables tabulated. Only available when data.frame=TRUE.}
-
 \item{split.vars}{TRUE/FALSE: Should col.vars be treated as combined or crossed variables? Defaults to \code{FALSE}}
+
+\item{percent}{TRUE/FALSE: Should output format be percent? Defaults to \code{FALSE}}
+
+\item{decimal}{TRUE/FALSE: Should output format be decimal? Defaults to \code{FALSE}}
 }
 \value{
 A \code{data.frame} with a "Question" column for the row variable names, a "Response" column for the row variable levels, columns displaying

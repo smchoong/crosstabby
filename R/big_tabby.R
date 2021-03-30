@@ -11,9 +11,8 @@
 #' @return A \code{data.frame} with a "Question" column for the row variable names, a "Response" column for the row variable levels, columns displaying
 #' percentages by total and grouped by column variables supplied by user.
 #'
-#' @import tidyverse pewmethods
+#' @import tidyverse pewmethods foreach
 #' @importFrom purrr map
-#' @importFrom foreach foreach
 #' @export
 #'
 #' @examples
