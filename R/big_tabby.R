@@ -23,7 +23,8 @@ big_tabby <-
            col.vars = NULL,
            wts = NULL,
            format = NULL,
-           split.vars = FALSE) {
+           split.vars = FALSE,
+           percent = TRUE) {
 
     # INITIAL ERROR HANDLING
 
@@ -105,7 +106,7 @@ big_tabby <-
             wt = wts,
             by = col.vars,
             by_total = T,
-            percent = T,
+            percent = F,
             digits = 0,
             include_unw = FALSE,
             complete = TRUE,
@@ -135,7 +136,7 @@ big_tabby <-
         tabby(df = df,
               row.vars,
               col.vars = b,
-              wts = "weights")
+              wts = wts)
       }
       out <- suppressWarnings(stacktab(out, row.vars))
 
@@ -155,6 +156,10 @@ big_tabby <-
         relocate(c("Question", "Response", "Total"), .before = everything()) %>%
         select(-weight_name)
 
+    }
+
+    if (percent) {
+      out <- out %>% mutate(across(where(is.numeric), .funs = function(w) 100 * w / sum(w)))
     }
 
     if (format == "percent") {
