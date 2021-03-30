@@ -14,6 +14,6 @@ stacktab <- function(df_list, vars) {
   var_names <- x %>%
     select(all_of(vars)) %>% names()
   out <- x %>%
-    gather(var_names, key = "Question", value = "Response") %>%
+    gather(all_of(var_names), key = "Question", value = "Response") %>%
     drop_na(Response)
 }
