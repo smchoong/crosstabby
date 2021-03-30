@@ -24,7 +24,7 @@ big_tabby <-
            wts = NULL,
            format = NULL,
            split.vars = FALSE,
-           percent = TRUE) {
+           percent = FALSE) {
 
     # INITIAL ERROR HANDLING
 
