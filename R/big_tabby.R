@@ -22,8 +22,7 @@ big_tabby <-
            row.vars,
            col.vars = NULL,
            wts = NULL,
-           data.frame = FALSE,
-           format = FALSE,
+           format = NULL,
            split.vars = FALSE) {
 
     # INITIAL ERROR HANDLING
@@ -115,34 +114,22 @@ big_tabby <-
 
     }
 
-    if (is.null(col.vars) & length(row.vars) > 1 & data.frame) {
+    if (is.null(col.vars) & length(row.vars) > 1) {
       out <- tabby(df, row.vars, col.vars, wts)
       out <- suppressWarnings(stacktab(out, row.vars)) %>%
         relocate(c("Question", "Response"), .before = everything())
 
     }
 
+
     if (split.vars) {
-      out <- tabby(df, row.vars, col.vars, wts)
-    }
-
-    else if (length(col.vars) > 1) {
-      out <- foreach::foreach(b = col.vars, .combine = 'cbind') %do% {
-        tabby(df,
-              row.vars,
-              col.vars = b,
-              wts)
-      }
-    }
-
-    if (split.vars & data.frame) {
       out <- tabby(df, row.vars, col.vars, wts)
       out <- suppressWarnings(stacktab(out, row.vars)) %>%
         relocate(c("Question", "Response", "Total"), .before = everything()) %>%
         select(-weight_name)
     }
 
-    else if (length(col.vars) > 1 & data.frame) {
+    else if (length(col.vars) > 1) {
       out <- foreach::foreach(b = col.vars, .combine = 'cbind') %do% {
         tabby(df = df,
               row.vars,
@@ -169,11 +156,11 @@ big_tabby <-
 
     }
 
-    if (data.frame & format == "percent") {
+    if (format == "percent") {
       out <- out %>% mutate(across(where(is.numeric), ~ paste0(.x, "%")))
     }
 
-    if (data.frame & format == "decimal") {
+    if (format == "decimal") {
       out <- out %>% mutate(across(where(is.numeric), ~ .x * 0.01))
     }
 
