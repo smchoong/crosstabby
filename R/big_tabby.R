@@ -159,7 +159,7 @@ big_tabby <-
     }
 
     if (percent) {
-      out <- out %>% mutate(across(where(is.numeric), .funs = function(w) 100 * w / sum(w)))
+      out <- out %>% mutate(across(where(is.numeric), ~ .x * 100 / sum(.x)))
     }
 
     if (format == "percent") {
