@@ -158,6 +158,13 @@ big_tabby <-
 
     }
 
+    else {
+      out <- tabby(df, row.vars, col.vars, wts)
+      out <- suppressWarnings(stacktab(out, row.vars)) %>%
+        relocate(c("Question", "Response", "Total"), .before = everything()) %>%
+        select(-weight_name)
+    }
+
     if (percent) {
       out <- out %>% mutate(across(where(is.numeric), ~ paste0(round(.x * 100 / sum(.x),0),"%")))
     }
