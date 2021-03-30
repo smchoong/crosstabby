@@ -8,6 +8,9 @@
 #' @export
 #'
 #' @examples
+#' # Add new combined variable to data.frame
+#' library(dplyr)
+#' nationscape_2020_excerpt <- nationscape_2020_excerpt %>% mutate(cross_vars(., "gender", "vote_2016"))
 cross_vars <- function(df, var1, var2) {
 
   new_name <- paste(var1, var2, sep = " x ")

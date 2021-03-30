@@ -4,10 +4,12 @@
 \alias{stacktab}
 \title{Combine list of data.frames vertically as one data.frame}
 \usage{
-stacktab(x)
+stacktab(df_list, vars)
 }
 \arguments{
-\item{x}{A \code{list} of data.frames}
+\item{df_list}{A \code{list} of data.frames}
+
+\item{row.vars}{A \code{character} vector}
 }
 \value{
 A \code{data.frame}

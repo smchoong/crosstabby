@@ -19,3 +19,8 @@ cross_vars(df, var1, var2)
 \description{
 Combine two variables for analysis by groups
 }
+\examples{
+# Add new combined variable to data.frame
+library(dplyr)
+nationscape_2020_excerpt <- nationscape_2020_excerpt \%>\% mutate(cross_vars(., "gender", "vote_2016"))
+}
