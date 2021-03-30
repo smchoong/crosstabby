@@ -116,6 +116,10 @@ big_tabby <-
 
     }
 
+    if (is.null(col.vars) & length(row.vars)==1) {
+      out <- tabby(df, row.vars, col.vars, wts)
+    }
+
     if (is.null(col.vars) & length(row.vars) > 1) {
       out <- tabby(df, row.vars, col.vars, wts)
       out <- suppressWarnings(stacktab(out, row.vars)) %>%
@@ -159,7 +163,7 @@ big_tabby <-
     }
 
     if (percent) {
-      out <- out %>% mutate(across(where(is.numeric), ~ .x * 100 / sum(.x)))
+      out <- out %>% mutate(across(where(is.numeric), ~ (.x * 100 / sum(.x))))
     }
 
     if (format == "percent") {
