@@ -4,9 +4,9 @@
 #' @param row.vars A \code{character} or {character} vector
 #' @param col.vars A \code{character} or {character} vector
 #' @param wts A \code{character} or {character} vector
-#' @param data.frame TRUE/FALSE: Should output be returned as a data.frame? Defaults to \code{FALSE}
-#' @param format A \code{character} indicating "percent" or "decimal" format for the totals of the variables tabulated. Only available when data.frame=TRUE.
 #' @param split.vars TRUE/FALSE: Should col.vars be treated as combined or crossed variables? Defaults to \code{FALSE}
+#' @param percent TRUE/FALSE: Should output format be percent? Defaults to \code{FALSE}
+#' @param decimal TRUE/FALSE: Should output format be decimal? Defaults to \code{FALSE}
 #'
 #' @return A \code{data.frame} with a "Question" column for the row variable names, a "Response" column for the row variable levels, columns displaying
 #' percentages by total and grouped by column variables supplied by user.
@@ -22,19 +22,15 @@ big_tabby <-
            row.vars,
            col.vars = NULL,
            wts = NULL,
-           format = NULL,
            split.vars = FALSE,
-           percent = FALSE) {
+           percent = FALSE,
+           decimal = FALSE) {
 
     # INITIAL ERROR HANDLING
 
     if (split.vars &
         length(col.vars) <= 1)
       stop("To implement split.vars, the col.vars argument must be a character vector")
-    # if (!is.null(format) & !(data.frame))
-    #   stop("The data.frame argument must be set to TRUE to use the format argument")
-    # if (!is.null(format) & !(format %in% c("percent", "decimal")))
-    #   stop("The format argument requires character input of either 'percent' or 'decimal'")
 
     # Detect presence of variables with excessive number of levels in row.vars and col.vars arguments
     if (!(is.null(row.vars) & is.null(col.vars))) {
@@ -117,7 +113,7 @@ big_tabby <-
     }
 
     if (is.null(col.vars) & length(row.vars)==1) {
-      out <- tabby(df, row.vars, col.vars, wts)
+      out <- tabby(df, row.vars, col.vars, wts) %>% as.data.frame()
     }
 
     if (is.null(col.vars) & length(row.vars) > 1) {
@@ -163,15 +159,11 @@ big_tabby <-
     }
 
     if (percent) {
-      out <- out %>% mutate(across(where(is.numeric), ~ (.x * 100 / sum(.x))))
+      out <- out %>% mutate(across(where(is.numeric), ~ paste0(round(.x * 100 / sum(.x),0),"%")))
     }
 
-    if (format == "percent") {
-      out <- out %>% mutate(across(where(is.numeric), ~ paste0(.x, "%")))
-    }
-
-    if (format == "decimal") {
-      out <- out %>% mutate(across(where(is.numeric), ~ .x * 0.01))
+    if (decimal) {
+      out <- out %>% mutate(across(where(is.numeric), ~ round(.x / sum(.x),2)))
     }
 
     return(out)
