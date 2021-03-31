@@ -164,11 +164,15 @@ big_tabby <-
     }
 
     if (percent) {
-      out <- out %>% mutate(across(where(is.numeric), ~ paste0(round(.x * 100 / sum(.x),0),"%")))
+      out <- out %>%
+        group_by(Question) %>%
+        mutate(across(where(is.numeric), ~ paste0(round(.x * 100 / sum(.x),0),"%")))
     }
 
     if (decimal) {
-      out <- out %>% mutate(across(where(is.numeric), ~ round(.x / sum(.x),2)))
+      out <- out %>%
+        group_by(Question) %>%
+        mutate(across(where(is.numeric), ~ round(.x / sum(.x),2)))
     }
 
     return(out)
