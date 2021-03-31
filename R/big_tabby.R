@@ -115,7 +115,7 @@ big_tabby <-
       out <- tabby(df, row.vars, col.vars, wts) %>% as.data.frame()
     }
 
-    if (is.null(col.vars) & length(row.vars) > 1) {
+    else if (is.null(col.vars) & length(row.vars) > 1) {
       out <- tabby(df, row.vars, col.vars, wts)
       out <- suppressWarnings(stacktab(out, row.vars)) %>%
         relocate(c("Question", "Response"), .before = everything())
