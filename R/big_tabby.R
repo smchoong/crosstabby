@@ -160,8 +160,7 @@ big_tabby <-
     else {
       out <- tabby(df, row.vars, col.vars, wts)
       out <- suppressWarnings(stacktab(out, row.vars)) %>%
-        relocate(c("Question", "Response", "Total"), .before = everything()) %>%
-        select(-weight_name)
+        relocate(c("Question", "Response"), .before = everything())
     }
 
     if (percent) {
