@@ -137,10 +137,22 @@ big_tabby <-
               col.vars = b,
               wts = wts)
       }
+
       out <- suppressWarnings(stacktab(out, row.vars))
 
       fct_df <- df_to_factor(df)
       fct_info <- get_fct_info(fct_df, row.vars)
+
+      input_levels <- unname(unlist(fct_info[[2]]))
+      column_order<-c("Question", "Response", "Total", var)
+      output_levels <- out %>%
+        select(-c(Question, Response, weight_name)) %>%
+        names()
+      Missing <- setdiff(input_levels, output_levels)
+
+      if (length(Missing)>0) {
+        out[Missing] <- 0
+      }
 
       out <- aggregate(
         x = out[, !(names(out) %in% c("Question", "Response"))],
@@ -151,9 +163,16 @@ big_tabby <-
         min,
         na.rm = TRUE
       ) %>%
-        arrange(match(Question, fct_info[[1]]), match(Response, fct_info[[2]])) %>%
+        arrange(match(Question, fct_info[[1]]), match(Response, input_levels)) %>%
         relocate(c("Question", "Response", "Total"), .before = everything()) %>%
         select(-weight_name)
+
+      out<-out[,var_ord]
+
+      if (length(which(sapply(out, is.infinite)))>0) {
+        out[sapply(out, is.infinite)] <- 0
+      }
+
 
     }
 
@@ -161,6 +180,12 @@ big_tabby <-
       out <- tabby(df, row.vars, col.vars, wts)
       out <- suppressWarnings(stacktab(out, row.vars)) %>%
         relocate(c("Question", "Response"), .before = everything())
+    }
+
+    if (exists("Total")) {
+
+      out <- out %>% relocate("Total", .after = Response)
+
     }
 
     if (percent) {
