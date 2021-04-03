@@ -141,14 +141,17 @@ big_tabby <-
       out <- suppressWarnings(stacktab(out, row.vars))
 
       fct_df <- df_to_factor(df)
-      fct_info <- get_fct_info(fct_df, row.vars)
+      fct_info_rw <- get_fct_info(fct_df, row.vars)
+      fct_info_cl <-get_fct_info(fct_df, col.vars)
 
-      input_levels <- unname(unlist(fct_info[[2]]))
-      column_order<-c("Question", "Response", "Total", var)
+      row_levels <- unname(unlist(fct_info_rw[[2]]))
+
+      col_levels <- unname(unlist(fct_info_cl[[2]]))
+      column_order<-c("Question", "Response", "Total", col_levels)
       output_levels <- out %>%
         select(-c(Question, Response, weight_name)) %>%
         names()
-      Missing <- setdiff(input_levels, output_levels)
+      Missing <- setdiff(col_levels, output_levels)
 
       if (length(Missing)>0) {
         out[Missing] <- 0
@@ -163,11 +166,11 @@ big_tabby <-
         min,
         na.rm = TRUE
       ) %>%
-        arrange(match(Question, fct_info[[1]]), match(Response, input_levels)) %>%
+        arrange(match(Question, fct_info_rw[[1]]), match(Response, row_levels)) %>%
         relocate(c("Question", "Response", "Total"), .before = everything()) %>%
         select(-weight_name)
 
-      out<-out[,var_ord]
+      out<-out[,column_order]
 
       if (length(which(sapply(out, is.infinite)))>0) {
         out[sapply(out, is.infinite)] <- 0
@@ -182,9 +185,15 @@ big_tabby <-
         relocate(c("Question", "Response"), .before = everything())
     }
 
-    if (exists("Total")) {
+    if (length(which(grepl("Total", names(out))))>0) {
 
       out <- out %>% relocate("Total", .after = Response)
+
+    }
+
+    if (length(which(grepl("weight_name", names(out))))>0) {
+
+      out <- out %>% select(-weight_name)
 
     }
 
