@@ -15,11 +15,11 @@ get_input_lengths <- function(df, input1, input2 = NULL) {
   rw_ln <- lapply((sapply(fct_df_rw, levels)), length)
   cl_ln <- lapply((sapply(fct_df_cl, levels)), length)
 
-  problem_vars <- c(rw_ln > 10 & cl_ln > 10)
+  problem_vars <- c(rw_ln > 20 & cl_ln > 20)
 
-  problem_vars_rw <- rw_ln > 10
+  problem_vars_rw <- rw_ln > 20
 
-  problem_vars_cl <- cl_ln > 10
+  problem_vars_cl <- cl_ln > 20
 
   return(c(problem_vars, problem_vars_rw, problem_vars_cl))
 

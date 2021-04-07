@@ -1,5 +1,11 @@
-test_that("mutli var x multi var tab works", {
-  load("~/Documents/R Scripts & Data/crosstabby/data/nationscape_2020_excerpt.rda")
 
-  expect_equal(2 * 2, 4)
+context("data.frame object returned")
+
+test_that("when length(row.var)==1 output is a data.frame", {
+  df <- data.frame(
+    x = c(1, 1, 1, 1),
+    y = c(1, 1, 2, 2),
+    z = c(1, 2, 1, 2)
+  )
+  expect_s3_class(big_tabby(df,"x"), "data.frame")
 })

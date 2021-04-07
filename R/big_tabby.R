@@ -50,7 +50,7 @@ big_tabby <-
           paste(str_to_upper(names(
             which(problem_vars)
           )), collapse = ", "),
-          "exceeds the recommended number of response levels (<=10)."
+          "exceeds the recommended number of response levels (<=20)."
         )
       )
 
@@ -200,13 +200,27 @@ big_tabby <-
     if (percent) {
       out <- out %>%
         group_by(Question) %>%
-        mutate(across(where(is.numeric), ~ paste0(round(.x * 100 / sum(.x),0),"%")))
+        mutate(across(where(is.numeric), ~ round(.x * 100 / sum(.x),0)))
+
+      is.nan.data.frame <- function(x)
+        do.call(cbind, lapply(x, is.nan))
+
+      out[is.nan(out)] <- 0
+
+      out <- out %>%
+        group_by(Question) %>%
+        mutate(across(where(is.numeric), ~ paste0(.x,"%")))
     }
 
     if (decimal) {
       out <- out %>%
         group_by(Question) %>%
         mutate(across(where(is.numeric), ~ round(.x / sum(.x),2)))
+
+      is.nan.data.frame <- function(x)
+        do.call(cbind, lapply(x, is.nan))
+
+      out[is.nan(out)] <- 0
     }
 
     return(out)
