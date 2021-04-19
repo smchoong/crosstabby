@@ -11,6 +11,7 @@ knitr::opts_chunk$set(
   fig.path = "man/figures/README-",
   out.width = "100%"
 )
+require(tidyverse)
 ```
 
 # crosstabby
@@ -34,27 +35,35 @@ And the development version from [GitHub](https://github.com/) with:
 # install.packages("devtools")
 devtools::install_github("smchoong/crosstabby")
 ```
-## Example
+## Crosstabby example: extended crosstab functionality
 
-This is a basic example which shows you how to solve a common problem:
+Let's use crosstabby's main function, **`big_tabby()`**, to generate a simple crosstab and then a more extensive crosstab. 
+
+Here's an example of how to pull a simple crosstab:
 
 ```{r example}
 library(crosstabby)
-## basic example code
+row<-c("pres_approval")
+col<-c("gender")
+data<-nationscape_2020_excerpt
+
+crosstabby::big_tabby(data, row, col, percent = TRUE)
+
 ```
 
-What is special about using `README.Rmd` instead of just `README.md`? You can include R chunks like so:
+Now, let's pull a more complex crosstab that uses weights:
 
 ```{r cars}
-summary(cars)
+row<-c("pres_approval", "vote_2016", "right_track", "economy_better", "vote_2020")
+col<-c("pid3", "ideo5", "household_gun_owner", "gender", "census_region", 
+       "race_ethnicity", "household_income", "education")
+data<-nationscape_2020_excerpt
+
+crosstabby::big_tabby(data, row, col, wts = "weight", percent = TRUE) %>%
+  head()
 ```
 
-You'll still need to render `README.Rmd` regularly, to keep `README.md` up-to-date.
+So here we have a larger scale crosstab with row variables broken down by a number of different demographic variables. We don't yet have column spanner labels added in to make the crosstab more readable but this is the minimum viable **`big_tabby()`** product.
 
-You can also embed plots, for example:
+You'll notice that the **`big_tabby()`** function removed the "household_income" variable because it exceeded the recommended number of response levels (less than or equal to 20 levels). To get around this QC within **`big_tabby()`**, we'll want to either recode the income variable into a grouped variable with fewer levels or simply remove it from our desired column variables before running the crosstab.
 
-```{r pressure, echo = FALSE}
-plot(pressure)
-```
-
-In that case, don't forget to commit and push the resulting figure files, so they display on GitHub!
