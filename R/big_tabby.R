@@ -32,59 +32,59 @@ big_tabby <-
       stop("To implement split.vars, the col.vars argument must be a character vector")
 
     # Detect presence of variables with excessive number of levels in row.vars and col.vars arguments
-    if (!(is.null(row.vars) & is.null(col.vars))) {
-      problem_vars <-
-        suppressWarnings(get_input_lengths(df, row.vars, col.vars))
-      problem_vars_rw <-
-        suppressWarnings(get_input_lengths(df, input1 = row.vars))
-      problem_vars_cl <-
-        suppressWarnings(get_input_lengths(df, input1 = col.vars))
-
-    }
-
-    # If variables with too many levels exist, ask user whether they want the variables removed or the operation cancelled
-    if (length(which(problem_vars)) > 0) {
-      message(
-        paste(
-          "Variable input(s)",
-          paste(str_to_upper(names(
-            which(problem_vars)
-          )), collapse = ", "),
-          "exceeds the recommended number of response levels (<=20)."
-        )
-      )
-
-      prompt1 <-
-        readline(
-          "Would you like to remove the problematic variables and proceed with the operation? (Y/N)"
-        )
-      if (regexpr(prompt1, 'y', ignore.case = TRUE) == 1) {
-        pbv_r <- names(which(problem_vars_rw))
-        row.vars.clean <-
-          as.data.frame(row.vars) %>% filter(!row.vars %in% pbv_r)
-        row.vars <- row.vars.clean[['row.vars']]
-
-        pbv_c <- names(which(problem_vars_cl))
-        col.vars.clean <-
-          as.data.frame(col.vars) %>% filter(!col.vars %in% pbv_c)
-        col.vars <- col.vars.clean[['col.vars']]
-
-        continue = TRUE
-      } else if (regexpr(prompt1, 'n', ignore.case = TRUE) == 1) {
-        message("Operation cancelled by user.")
-        opt <- options(show.error.messages = FALSE)
-        on.exit(options(opt))
-        stop()
-        continue = FALSE
-      } else {
-        message("Operation cancelled by user.")
-        opt <- options(show.error.messages = FALSE)
-        on.exit(options(opt))
-        stop()
-        continue = FALSE
-      }
-
-    }
+    # if (!(is.null(row.vars) & is.null(col.vars))) {
+    #   problem_vars <-
+    #     suppressWarnings(get_input_lengths(df, row.vars, col.vars))
+    #   problem_vars_rw <-
+    #     suppressWarnings(get_input_lengths(df, input1 = row.vars))
+    #   problem_vars_cl <-
+    #     suppressWarnings(get_input_lengths(df, input1 = col.vars))
+    #
+    # }
+    #
+    # # If variables with too many levels exist, ask user whether they want the variables removed or the operation cancelled
+    # if (length(which(problem_vars)) > 0) {
+    #   message(
+    #     paste(
+    #       "Variable input(s)",
+    #       paste(str_to_upper(names(
+    #         which(problem_vars)
+    #       )), collapse = ", "),
+    #       "exceeds the recommended number of response levels (<=20)."
+    #     )
+    #   )
+    #
+    #   prompt1 <-
+    #     readline(
+    #       "Would you like to remove the problematic variables and proceed with the operation? (Y/N)"
+    #     )
+    #   if (regexpr(prompt1, 'y', ignore.case = TRUE) == 1) {
+    #     pbv_r <- names(which(problem_vars_rw))
+    #     row.vars.clean <-
+    #       as.data.frame(row.vars) %>% filter(!row.vars %in% pbv_r)
+    #     row.vars <- row.vars.clean[['row.vars']]
+    #
+    #     pbv_c <- names(which(problem_vars_cl))
+    #     col.vars.clean <-
+    #       as.data.frame(col.vars) %>% filter(!col.vars %in% pbv_c)
+    #     col.vars <- col.vars.clean[['col.vars']]
+    #
+    #     continue = TRUE
+    #   } else if (regexpr(prompt1, 'n', ignore.case = TRUE) == 1) {
+    #     message("Operation cancelled by user.")
+    #     opt <- options(show.error.messages = FALSE)
+    #     on.exit(options(opt))
+    #     stop()
+    #     continue = FALSE
+    #   } else {
+    #     message("Operation cancelled by user.")
+    #     opt <- options(show.error.messages = FALSE)
+    #     on.exit(options(opt))
+    #     stop()
+    #     continue = FALSE
+    #   }
+    #
+    # }
 
 
     # MAIN INTERNAL FUNCTION
