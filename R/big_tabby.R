@@ -7,6 +7,7 @@
 #' @param split.vars TRUE/FALSE: Should col.vars be treated as combined or crossed variables? Defaults to \code{FALSE}
 #' @param percent TRUE/FALSE: Should output format be percent? Defaults to \code{FALSE}
 #' @param decimal TRUE/FALSE: Should output format be decimal? Defaults to \code{FALSE}
+#' @param digits A \code{integer} How many decimal places to round to? Defaults to \code{0}
 #'
 #' @return A \code{data.frame} with a "Question" column for the row variable names, a "Response" column for the row variable levels, columns displaying
 #' percentages by total and grouped by column variables supplied by user.
@@ -23,7 +24,8 @@ big_tabby <-
            wts = NULL,
            split.vars = FALSE,
            percent = FALSE,
-           decimal = FALSE) {
+           decimal = FALSE,
+           digits = 0) {
 
     # INITIAL ERROR HANDLING
 
@@ -91,7 +93,8 @@ big_tabby <-
     tabby <- function(df,
                       row.vars,
                       col.vars = NULL,
-                      wts = NULL) {
+                      wts = NULL,
+                      places = digits) {
       out <-
         purrr::map(
           row.vars,
@@ -102,7 +105,7 @@ big_tabby <-
             by = col.vars,
             by_total = T,
             percent = F,
-            digits = 0,
+            digits = places,
             include_unw = FALSE,
             complete = TRUE,
             na.rm = TRUE
