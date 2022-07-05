@@ -203,7 +203,7 @@ big_tabby <-
     if (percent) {
       out <- out %>%
         group_by(Question) %>%
-        mutate(across(where(is.numeric), ~ round(.x * 100 / sum(.x),0)))
+        mutate(across(where(is.numeric), ~ round(.x * 100 / sum(.x),digits)))
 
       is.nan.data.frame <- function(x)
         do.call(cbind, lapply(x, is.nan))
@@ -218,7 +218,7 @@ big_tabby <-
     if (decimal) {
       out <- out %>%
         group_by(Question) %>%
-        mutate(across(where(is.numeric), ~ round(.x / sum(.x),2)))
+        mutate(across(where(is.numeric), ~ round(.x / sum(.x),digits)))
 
       is.nan.data.frame <- function(x)
         do.call(cbind, lapply(x, is.nan))
