@@ -7,7 +7,7 @@
 #' @param split.vars TRUE/FALSE: Should col.vars be treated as combined or crossed variables? Defaults to \code{FALSE}
 #' @param percent TRUE/FALSE: Should output format be percent? Defaults to \code{FALSE}
 #' @param decimal TRUE/FALSE: Should output format be decimal? Defaults to \code{FALSE}
-#' @param digits A \code{integer} How many decimal places to round to? Defaults to \code{0}
+#' @param digits A \code{integer} How many decimal places to round to? Defaults to \code{5}
 #'
 #' @return A \code{data.frame} with a "Question" column for the row variable names, a "Response" column for the row variable levels, columns displaying
 #' percentages by total and grouped by column variables supplied by user.
@@ -25,7 +25,7 @@ big_tabby <-
            split.vars = FALSE,
            percent = FALSE,
            decimal = FALSE,
-           digits = 0) {
+           digits = 5) {
 
     # INITIAL ERROR HANDLING
 
@@ -52,7 +52,7 @@ big_tabby <-
           paste(str_to_upper(names(
             which(problem_vars)
           )), collapse = ", "),
-          "exceeds the recommended number of response levels (<=50)."
+          "exceeds the recommended number of response levels (<=100)."
         )
       )
 
