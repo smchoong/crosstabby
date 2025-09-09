@@ -25,7 +25,8 @@ big_tabby <-
            split.vars = FALSE,
            percent = FALSE,
            decimal = FALSE,
-           digits = 5) {
+           digits = 5,
+           na_rm = TRUE) {
 
     # INITIAL ERROR HANDLING
 
@@ -94,7 +95,8 @@ big_tabby <-
                       row.vars,
                       col.vars = NULL,
                       wts = NULL,
-                      places = digits) {
+                      places = digits,
+                      excl = na_rm) {
       out <-
         purrr::map(
           row.vars,
@@ -108,7 +110,7 @@ big_tabby <-
             digits = places,
             include_unw = FALSE,
             complete = TRUE,
-            na.rm = TRUE
+            na.rm = excl
           )
         )
 
