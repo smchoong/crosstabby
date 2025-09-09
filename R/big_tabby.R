@@ -8,6 +8,7 @@
 #' @param percent TRUE/FALSE: Should output format be percent? Defaults to \code{FALSE}
 #' @param decimal TRUE/FALSE: Should output format be decimal? Defaults to \code{FALSE}
 #' @param digits A \code{integer} How many decimal places to round to? Defaults to \code{5}
+#' @param na_rm TRUE/FALSE: Remove NULL cases? Defaults to \code{TRUE}
 #'
 #' @return A \code{data.frame} with a "Question" column for the row variable names, a "Response" column for the row variable levels, columns displaying
 #' percentages by total and grouped by column variables supplied by user.
